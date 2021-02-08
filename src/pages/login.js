@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./login.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import auth from "../helpers/auth";
+import {login} from "../helpers/auth";
 
 export default function Login(props) {
   const [email, setEmail] = useState("");
@@ -14,33 +14,37 @@ export default function Login(props) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await auth.login(email, password, props);
+    await login(email, password, props);
   }
 
   return (
     <div className="Login">
-          <Form onSubmit={handleSubmit}>
-            <Form.Group size="lg" controlId="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                autoFocus
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group size="lg" controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Group>
-            <Button type="submit" disabled={!validateForm()}>
-              Login
-            </Button>
-          </Form>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            autoFocus
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Button
+          type="submit"
+          disabled={!validateForm()}
+          onClick={(e) => handleSubmit(e)}
+        >
+          Login
+        </Button>
+      </Form>
     </div>
   );
 }

@@ -1,14 +1,16 @@
-import React, { } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
-import Auth from "./auth";
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-    console.log(Auth.isAuthenticated);
+ 
+  let token = localStorage.getItem("token") || "";
+  
   return (
     <Route
       {...rest}
+     
       render={(props) => {
-        if (Auth.authenticated) {
+        if (token) {
           return <Component {...props} />;
         } else {
           return (
