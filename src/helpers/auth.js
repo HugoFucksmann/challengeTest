@@ -24,7 +24,7 @@ export async function login(email, password, props) {
 }
 
 export function logout(props) {
-  props.history.push("/");
+  props.push("/");
   localStorage.removeItem("token");
 }
 

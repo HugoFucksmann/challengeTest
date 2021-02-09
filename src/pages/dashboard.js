@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button, Image, Col, Row, Navbar, Container } from 'react-bootstrap'
+import { Button, Image, Navbar, Container } from 'react-bootstrap'
 import {logout} from '../helpers/auth'
 import { imagenUrl } from "../helpers/imagenUrl";
-import logo from '../assets/logo.png'
-import { token } from "../helpers/auth";
 
 export default function Dashboard(props){
     const [user, setUser] = useState()
@@ -26,23 +24,26 @@ export default function Dashboard(props){
     if(!user) return <b>loading...</b>
         console.log(user);
     
-    return (<>
-      <NavBar {...user} />
-      <Container>
-        <Content />
-      </Container>
-    </>);
+    return (
+      <>
+        <NavBar {...user} {...props.history} />
+        <Container>
+          <Content />
+        </Container>
+      </>
+    );
 }
 
-const NavBar = (user) => {
-    const imagen = imagenUrl(user.imagen);
+const NavBar = (props) => {
+    const imagen = imagenUrl(props.imagen);
+   
     return (
       <Navbar style={{ backgroundColor: "lightblue" }}>
         <Navbar.Brand>Challenge Test</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <b>{user.nombre}&nbsp;&nbsp;</b>
+            Signed in as: <b>{props.nombre}&nbsp;&nbsp;</b>
             <Image
               alt="avatar"
               src={imagen}
@@ -50,57 +51,18 @@ const NavBar = (user) => {
               style={{ height: "30px" }}
             />
           </Navbar.Text>
+          <Button size="small" variant="link" onClick={() => logout(props)}>Log Out</Button>
         </Navbar.Collapse>
       </Navbar>
     );
 }
 
-const Content = () => {
+const Content = (props) => {
 
     return (
-        <div>
-            <p>Contet</p>
-        </div>
-    )
-};
-
-
-/**
- *  <div>
-        <Row sm={12}>
-          <Col
-            sm={1}
-            style={{
-              height: "100vh",
-              backgroundColor: "lightblue",
-            }}
-          >
-            <div>
-              <img
-                src={logo}
-                style={{
-                  height: "50px",
-                  marginTop: "20px",
-                  marginBottom: "20px",
-                }}
-                alt="logo"
-              />
-              <hr />
-              <Image alt="avatar" src={imagen} roundedCircle  style={{ height: "30px" }} />
-              <p>{user.nombre}</p>
-              <Button
-                size="sm"
-                variant="outline-info"
-                onClick={() => logout(props)}
-              >
-                logout
-              </Button>
-            </div>
-          </Col>
-          <Col>
-            <b style={{ fontSize: "28px", marginLeft: "15px" }}>My Ideas</b>
-            <hr />
-          </Col>
-        </Row>
+      <div>
+        <p>Contet</p>
+       
       </div>
- */
+    );
+};
