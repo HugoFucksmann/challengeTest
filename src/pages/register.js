@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {register} from '../helpers/auth'
 import "./login.css";
 import { login } from "../helpers/auth";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
@@ -15,7 +16,7 @@ export default function Register(props) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await login(email, password, props);
+    await register(email, password, nombre, props);
   }
 
   return (
