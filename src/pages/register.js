@@ -22,9 +22,7 @@ export default function Register(props) {
   return (
     <div style={{ width: "25%", margin: "150px auto" }}>
       <Card className="login shadow border-info">
-        <Card.Title className="text-info" style={{ textAlign: "center" }}>
-          Sing Up
-        </Card.Title>
+        <Card.Header className="text-center">Sign up</Card.Header>
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group size="lg" controlId="email">

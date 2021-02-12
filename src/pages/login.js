@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./login.css";
 import {login} from "../helpers/auth";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function Login(props) {
   const [email, setEmail] = useState("");
@@ -19,6 +20,7 @@ export default function Login(props) {
   return (
     <div style={{ width: "25%", margin: "150px auto" }}>
       <Card className="login shadow border-info">
+        <Card.Header className="text-center">Login</Card.Header>
         <Card.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group size="lg" controlId="email">
@@ -50,15 +52,13 @@ export default function Login(props) {
                   Login
                 </Button>
               </Col>
-              <Col md={{ span: 4, offset: 4 }}>
-                <Button
-                  size="sm"
-                  variant="outline-info"
-                  type="submit"
-                  onClick={() => props.history.push("/registrarse")}
-                >
-                  registrarse
-                </Button>
+              <Col md={{ span: 6, offset: 2 }}>
+                <p style={{ fontSize: "12px", paddingTop: "10px" }}>
+                  no account?{"  "}
+                  <Link onClick={() => props.history.push("/registrarse")}>
+                    register
+                  </Link>
+                </p>
               </Col>
             </Row>
           </Form>
